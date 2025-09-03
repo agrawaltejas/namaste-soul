@@ -20,11 +20,19 @@ const Hero = ({ onSearch, searchQuery }: HeroProps) => {
       }}
     >
       <div className="container mx-auto px-4 text-center relative z-10">
-        {/* Main Heading */}
-        <div className="mb-12">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
-            Discover Holistic Events in Netherlands
+        {/* Brand & Tagline */}
+        <div className="mb-8">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4">
+            <span className="bg-gradient-primary bg-clip-text text-transparent">
+              NamasteSoul
+            </span>
           </h1>
+          <h2 className="text-xl md:text-2xl text-muted-foreground font-medium mb-8">
+            Ancient Wisdom, Modern Wellbeing
+          </h2>
+          <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-foreground leading-tight">
+            Discover Holistic Events in Netherlands
+          </h3>
         </div>
 
         {/* Search Bar */}
