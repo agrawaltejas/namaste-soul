@@ -20,22 +20,27 @@ const Hero = ({ onSearch, searchQuery }: HeroProps) => {
       }}
     >
       <div className="container mx-auto px-4 text-center relative z-10">
-        {/* Main Heading */}
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-          <span className="bg-gradient-primary bg-clip-text text-transparent">
-            Discover curated yoga
-          </span>
-          <br />
-          <span className="text-foreground">
-            & holistic events
-          </span>
-        </h1>
+        {/* Brand & Tagline */}
+        <div className="mb-8">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4">
+            <span className="bg-gradient-primary bg-clip-text text-transparent">
+              NamasteSoul
+            </span>
+          </h1>
+          <p className="text-xl md:text-2xl text-muted-foreground font-medium">
+            Ancient Wisdom, Modern Wellbeing
+          </p>
+        </div>
 
-        {/* Subheading */}
-        <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
-          Retreats, workshops & festivals in the Netherlands 
-          <span className="text-accent-vibrant font-medium"> (and India soon)</span>
-        </p>
+        {/* Secondary Heading */}
+        <div className="mb-12">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 text-foreground leading-tight">
+            Discover curated yoga & holistic events
+          </h2>
+          <p className="text-lg md:text-xl text-muted-foreground">
+            Retreats, workshops & festivals in the Netherlands
+          </p>
+        </div>
 
         {/* Search Bar */}
         <div className="max-w-2xl mx-auto mb-8">
