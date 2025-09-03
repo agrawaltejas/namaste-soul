@@ -20,26 +20,11 @@ const Hero = ({ onSearch, searchQuery }: HeroProps) => {
       }}
     >
       <div className="container mx-auto px-4 text-center relative z-10">
-        {/* Brand & Tagline */}
-        <div className="mb-8">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4">
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
-              NamasteSoul
-            </span>
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground font-medium">
-            Ancient Wisdom, Modern Wellbeing
-          </p>
-        </div>
-
-        {/* Secondary Heading */}
+        {/* Main Heading */}
         <div className="mb-12">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 text-foreground leading-tight">
-            Discover curated yoga & holistic events
-          </h2>
-          <p className="text-lg md:text-xl text-muted-foreground">
-            Retreats, workshops & festivals in the Netherlands
-          </p>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight">
+            Discover Holistic Events in Netherlands
+          </h1>
         </div>
 
         {/* Search Bar */}
@@ -65,7 +50,7 @@ const Hero = ({ onSearch, searchQuery }: HeroProps) => {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-muted-foreground">
           <div className="flex items-center gap-2">
             <MapPin className="h-5 w-5 text-primary" />
-            <span>Netherlands & India</span>
+            <span>Netherlands</span>
           </div>
           <div className="hidden sm:block w-1 h-1 bg-muted-foreground rounded-full"></div>
           <div className="flex items-center gap-2">

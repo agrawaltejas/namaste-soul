@@ -28,9 +28,6 @@ const Header = ({ onSearch, searchQuery }: HeaderProps) => {
             <div className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
               NamasteSoul
             </div>
-            <div className="hidden sm:block text-sm text-muted-foreground">
-              Ancient Wisdom, Modern Wellbeing
-            </div>
           </div>
 
           {/* Desktop Search */}
