@@ -30,7 +30,7 @@ const Hero = ({ onSearch, searchQuery }: HeroProps) => {
           <h2 className="text-xl md:text-2xl text-muted-foreground font-medium mb-8">
             Ancient Wisdom, Modern Wellbeing
           </h2>
-          <h3 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-foreground leading-tight">
+          <h3 className="text-lg md:text-xl font-medium text-muted-foreground leading-tight">
             Discover Holistic Events in Netherlands
           </h3>
         </div>
