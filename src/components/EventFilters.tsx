@@ -60,14 +60,14 @@ const EventFilters = ({ filters, onFiltersChange, totalResults }: EventFiltersPr
             Country
           </label>
           <Select
-            value={filters.country || ''}
-            onValueChange={(value) => updateFilter('country', value || undefined)}
+            value={filters.country || undefined}
+            onValueChange={(value) => updateFilter('country', value === 'all' ? undefined : value)}
           >
             <SelectTrigger>
               <SelectValue placeholder="All countries" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All countries</SelectItem>
+              <SelectItem value="all">All countries</SelectItem>
               <SelectItem value="Netherlands">Netherlands</SelectItem>
               <SelectItem value="India">India</SelectItem>
             </SelectContent>
@@ -81,14 +81,14 @@ const EventFilters = ({ filters, onFiltersChange, totalResults }: EventFiltersPr
             Category
           </label>
           <Select
-            value={filters.category || ''}
-            onValueChange={(value) => updateFilter('category', value || undefined)}
+            value={filters.category || undefined}
+            onValueChange={(value) => updateFilter('category', value === 'all' ? undefined : value)}
           >
             <SelectTrigger>
               <SelectValue placeholder="All categories" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All categories</SelectItem>
+              <SelectItem value="all">All categories</SelectItem>
               <SelectItem value="Yoga">🧘 Yoga</SelectItem>
               <SelectItem value="Ayurveda">🌿 Ayurveda</SelectItem>
               <SelectItem value="Astrology">🔭 Astrology</SelectItem>
@@ -101,14 +101,14 @@ const EventFilters = ({ filters, onFiltersChange, totalResults }: EventFiltersPr
         <div className="space-y-2">
           <label className="text-sm font-medium">Type</label>
           <Select
-            value={filters.type || ''}
-            onValueChange={(value) => updateFilter('type', value || undefined)}
+            value={filters.type || undefined}
+            onValueChange={(value) => updateFilter('type', value === 'all' ? undefined : value)}
           >
             <SelectTrigger>
               <SelectValue placeholder="All types" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All types</SelectItem>
+              <SelectItem value="all">All types</SelectItem>
               <SelectItem value="Retreat">Retreat</SelectItem>
               <SelectItem value="Workshop">Workshop</SelectItem>
               <SelectItem value="Festival">Festival</SelectItem>
@@ -124,14 +124,14 @@ const EventFilters = ({ filters, onFiltersChange, totalResults }: EventFiltersPr
             When
           </label>
           <Select
-            value={filters.dateRange || ''}
-            onValueChange={(value) => updateFilter('dateRange', value || undefined)}
+            value={filters.dateRange || undefined}
+            onValueChange={(value) => updateFilter('dateRange', value === 'all' ? undefined : value)}
           >
             <SelectTrigger>
               <SelectValue placeholder="Anytime" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">Anytime</SelectItem>
+              <SelectItem value="all">Anytime</SelectItem>
               <SelectItem value="this-weekend">This Weekend</SelectItem>
               <SelectItem value="next-30-days">Next 30 Days</SelectItem>
               <SelectItem value="custom">Custom Range</SelectItem>
@@ -146,14 +146,14 @@ const EventFilters = ({ filters, onFiltersChange, totalResults }: EventFiltersPr
             Duration
           </label>
           <Select
-            value={filters.duration || ''}
-            onValueChange={(value) => updateFilter('duration', value || undefined)}
+            value={filters.duration || undefined}
+            onValueChange={(value) => updateFilter('duration', value === 'all' ? undefined : value)}
           >
             <SelectTrigger>
               <SelectValue placeholder="Any length" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">Any length</SelectItem>
+              <SelectItem value="all">Any length</SelectItem>
               <SelectItem value="1-day">1 Day</SelectItem>
               <SelectItem value="weekend">Weekend (2-3 days)</SelectItem>
               <SelectItem value="3-4-days">3-4 Days</SelectItem>
@@ -167,14 +167,14 @@ const EventFilters = ({ filters, onFiltersChange, totalResults }: EventFiltersPr
         <div className="space-y-2">
           <label className="text-sm font-medium">Language</label>
           <Select
-            value={filters.language || ''}
-            onValueChange={(value) => updateFilter('language', value || undefined)}
+            value={filters.language || undefined}
+            onValueChange={(value) => updateFilter('language', value === 'all' ? undefined : value)}
           >
             <SelectTrigger>
               <SelectValue placeholder="All languages" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All languages</SelectItem>
+              <SelectItem value="all">All languages</SelectItem>
               <SelectItem value="English">English</SelectItem>
               <SelectItem value="Dutch">Dutch</SelectItem>
               <SelectItem value="Mixed">Mixed</SelectItem>
