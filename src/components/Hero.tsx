@@ -22,7 +22,7 @@ const Hero = ({ onSearch, searchQuery }: HeroProps) => {
       <div className="container mx-auto px-4 text-center relative z-10">
         {/* Brand & Tagline */}
         <div className="mb-6">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
             <span className="bg-gradient-primary bg-clip-text text-transparent">
               Ancient Wisdom, Modern Wellbeing
             </span>
