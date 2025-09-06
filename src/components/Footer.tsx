@@ -5,9 +5,9 @@ const Footer = () => {
   return (
     <footer className="bg-primary/5 border-t border-border">
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
           {/* Quick Links - Left */}
-          <div>
+          <div className="text-center md:text-left">
             <h4 className="font-semibold mb-4">Explore</h4>
             <ul className="space-y-2 text-muted-foreground">
               <li><a href="#explore" className="hover:text-primary transition-smooth">All Events</a></li>
@@ -37,13 +37,13 @@ const Footer = () => {
           </div>
 
           {/* Contact & Legal - Right */}
-          <div>
+          <div className="text-center md:text-right">
             <h4 className="font-semibold mb-4">Connect</h4>
             <ul className="space-y-2 text-muted-foreground">
               <li>
                 <a 
                   href="mailto:namaste.soul.contact@gmail.com" 
-                  className="hover:text-primary transition-smooth flex items-center gap-2"
+                  className="hover:text-primary transition-smooth inline-flex items-center gap-2 justify-center md:justify-end"
                 >
                   <Mail className="h-4 w-4" />
                   Contact Us
