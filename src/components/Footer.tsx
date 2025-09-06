@@ -5,13 +5,25 @@ const Footer = () => {
   return (
     <footer className="bg-primary/5 border-t border-border">
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="lg:col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Quick Links - Left */}
+          <div>
+            <h4 className="font-semibold mb-4">Explore</h4>
+            <ul className="space-y-2 text-muted-foreground">
+              <li><a href="#explore" className="hover:text-primary transition-smooth">All Events</a></li>
+              <li><a href="#explore" className="hover:text-primary transition-smooth">🧘 Yoga</a></li>
+              <li><a href="#explore" className="hover:text-primary transition-smooth">🌿 Ayurveda</a></li>
+              <li><a href="#explore" className="hover:text-primary transition-smooth">🔭 Astrology</a></li>
+              <li><a href="#explore" className="hover:text-primary transition-smooth">🔥 Tantra</a></li>
+            </ul>
+          </div>
+
+          {/* Brand - Center */}
+          <div className="text-center">
             <div className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">
               NamasteSoul
             </div>
-            <p className="text-muted-foreground mb-4 max-w-md">
+            <p className="text-muted-foreground mb-4">
               Ancient Wisdom, Modern Wellbeing
             </p>
             <Button 
@@ -24,19 +36,7 @@ const Footer = () => {
             </Button>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Explore</h4>
-            <ul className="space-y-2 text-muted-foreground">
-              <li><a href="#explore" className="hover:text-primary transition-smooth">All Events</a></li>
-              <li><a href="#explore" className="hover:text-primary transition-smooth">🧘 Yoga</a></li>
-              <li><a href="#explore" className="hover:text-primary transition-smooth">🌿 Ayurveda</a></li>
-              <li><a href="#explore" className="hover:text-primary transition-smooth">🔭 Astrology</a></li>
-              <li><a href="#explore" className="hover:text-primary transition-smooth">🔥 Tantra</a></li>
-            </ul>
-          </div>
-
-          {/* Contact & Legal */}
+          {/* Contact & Legal - Right */}
           <div>
             <h4 className="font-semibold mb-4">Connect</h4>
             <ul className="space-y-2 text-muted-foreground">
