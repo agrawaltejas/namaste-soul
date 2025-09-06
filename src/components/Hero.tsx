@@ -11,7 +11,7 @@ interface HeroProps {
 const Hero = ({ onSearch, searchQuery }: HeroProps) => {
   return (
     <section 
-      className="relative min-h-[70vh] flex items-center justify-center bg-gradient-hero overflow-hidden"
+      className="relative min-h-[50vh] flex items-center justify-center bg-gradient-hero overflow-hidden"
       style={{
         backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url(${heroBg})`,
         backgroundSize: 'cover',
@@ -21,22 +21,19 @@ const Hero = ({ onSearch, searchQuery }: HeroProps) => {
     >
       <div className="container mx-auto px-4 text-center relative z-10">
         {/* Brand & Tagline */}
-        <div className="mb-8">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4">
+        <div className="mb-6">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4">
             <span className="bg-gradient-primary bg-clip-text text-transparent">
-              NamasteSoul
+              Ancient Wisdom, Modern Wellbeing
             </span>
           </h1>
-          <h2 className="text-xl md:text-2xl text-muted-foreground font-medium mb-8">
-            Ancient Wisdom, Modern Wellbeing
-          </h2>
-          <h3 className="text-lg md:text-xl font-medium text-muted-foreground leading-tight">
+          <h2 className="text-base md:text-lg font-medium text-muted-foreground leading-tight">
             Discover Holistic Events in Netherlands
-          </h3>
+          </h2>
         </div>
 
         {/* Search Bar */}
-        <div className="max-w-2xl mx-auto mb-8">
+        <div className="max-w-2xl mx-auto mb-6">
           <div className="relative">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
             <Input

@@ -4,16 +4,15 @@ import { Mail, Plus, ExternalLink } from 'lucide-react';
 const Footer = () => {
   return (
     <footer className="bg-primary/5 border-t border-border">
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="container mx-auto px-4 py-12">
+        <div className="text-center">
           {/* Brand */}
-          <div className="lg:col-span-2">
+          <div className="mb-6">
             <div className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">
               NamasteSoul
             </div>
-            <p className="text-muted-foreground mb-4 max-w-md">
-              Ancient Wisdom, Modern Wellbeing. Discover curated yoga, ayurveda, 
-              astrology & tantra events across Netherlands and India.
+            <p className="text-muted-foreground mb-6">
+              Ancient Wisdom, Modern Wellbeing
             </p>
             <Button 
               size="lg"
@@ -24,45 +23,10 @@ const Footer = () => {
               Submit Your Event
             </Button>
           </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Explore</h4>
-            <ul className="space-y-2 text-muted-foreground">
-              <li><a href="#explore" className="hover:text-primary transition-smooth">All Events</a></li>
-              <li><a href="#explore" className="hover:text-primary transition-smooth">🧘 Yoga</a></li>
-              <li><a href="#explore" className="hover:text-primary transition-smooth">🌿 Ayurveda</a></li>
-              <li><a href="#explore" className="hover:text-primary transition-smooth">🔭 Astrology</a></li>
-              <li><a href="#explore" className="hover:text-primary transition-smooth">🔥 Tantra</a></li>
-            </ul>
-          </div>
-
-          {/* Contact & Legal */}
-          <div>
-            <h4 className="font-semibold mb-4">Connect</h4>
-            <ul className="space-y-2 text-muted-foreground">
-              <li>
-                <a 
-                  href="mailto:namaste.soul.contact@gmail.com" 
-                  className="hover:text-primary transition-smooth flex items-center gap-2"
-                >
-                  <Mail className="h-4 w-4" />
-                  Contact Us
-                </a>
-              </li>
-              <li><a href="#about" className="hover:text-primary transition-smooth">About</a></li>
-              <li><a href="#submit" className="hover:text-primary transition-smooth">For Organizers</a></li>
-              <li><a href="#legal" className="hover:text-primary transition-smooth">Privacy & Terms</a></li>
-            </ul>
-          </div>
         </div>
 
-        {/* Disclaimer */}
-        <div className="border-t border-border mt-12 pt-8 text-center text-sm text-muted-foreground">
-          <p className="mb-2">
-            <strong>Disclaimer:</strong> We aggregate public event information and link to official sources. 
-            Please verify final details on the organizer's website before booking.
-          </p>
+        {/* Copyright */}
+        <div className="border-t border-border mt-8 pt-6 text-center text-sm text-muted-foreground">
           <p>© 2025 NamasteSoul. Made with 🙏 for the spiritual community.</p>
         </div>
       </div>
