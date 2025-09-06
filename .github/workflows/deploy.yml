@@ -37,6 +37,9 @@ jobs:
       
     - name: List build output
       run: ls -la dist/
+      
+    - name: Check index.html content
+      run: head -30 dist/index.html
 
     - name: Setup Pages
       uses: actions/configure-pages@v4
