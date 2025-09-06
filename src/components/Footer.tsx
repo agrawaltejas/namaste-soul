@@ -5,9 +5,9 @@ const Footer = () => {
   return (
     <footer className="bg-primary/5 border-t border-border">
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start max-w-4xl mx-auto">
           {/* Quick Links - Left */}
-          <div className="text-center md:text-left">
+          <div className="text-center md:text-left md:pl-8">
             <h4 className="font-semibold mb-4">Explore</h4>
             <ul className="space-y-2 text-muted-foreground">
               <li><a href="#explore" className="hover:text-primary transition-smooth">All Events</a></li>
@@ -37,7 +37,7 @@ const Footer = () => {
           </div>
 
           {/* Contact & Legal - Right */}
-          <div className="text-center md:text-right">
+          <div className="text-center md:text-right md:pr-8">
             <h4 className="font-semibold mb-4">Connect</h4>
             <ul className="space-y-2 text-muted-foreground">
               <li>
