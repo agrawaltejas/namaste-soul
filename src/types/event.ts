@@ -18,6 +18,8 @@ export interface Event {
   tags?: string; // comma-separated
   status: 'published' | 'pending' | 'archived';
   featured?: boolean;
+  rating?: number; // 1-5 stars, AI-generated quality score
+  rating_reason?: string; // Why this event got this rating
   created_at: string;
   updated_at: string;
 }
