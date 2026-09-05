@@ -1,68 +1,125 @@
-import { Button } from '@/components/ui/button';
-import { Mail, Plus, ExternalLink } from 'lucide-react';
+import {
+  ArrowUpRight,
+  CalendarDays,
+  Compass,
+  FileText,
+  Flame,
+  Flower2,
+  Info,
+  Leaf,
+  Mail,
+  MoonStar,
+  Send,
+  Sparkles,
+  Tent,
+  type LucideIcon
+} from 'lucide-react';
 
-const Footer = () => {
-  return (
-    <footer className="bg-primary/5 border-t border-border">
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start max-w-4xl mx-auto">
-          {/* Quick Links - Left */}
-          <div className="text-center md:text-left md:pl-8">
-            <h4 className="font-semibold mb-4">Explore</h4>
-            <ul className="space-y-2 text-muted-foreground">
-              <li><a href="#explore" className="hover:text-primary transition-smooth">All Events</a></li>
-              <li><a href="#explore" className="hover:text-primary transition-smooth">🧘 Yoga</a></li>
-              <li><a href="#explore" className="hover:text-primary transition-smooth">🌿 Ayurveda</a></li>
-              <li><a href="#explore" className="hover:text-primary transition-smooth">🔭 Astrology</a></li>
-              <li><a href="#explore" className="hover:text-primary transition-smooth">🔥 Tantra</a></li>
-            </ul>
-          </div>
+interface FooterLink {
+  label: string;
+  href: string;
+  icon: LucideIcon;
+}
 
-          {/* Brand - Center */}
-          <div className="text-center">
-            <div className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">
-              NamasteSoul
-            </div>
-            <p className="text-muted-foreground mb-4">
-              Ancient Wisdom, Modern Wellbeing
-            </p>
-            <Button 
-              size="lg"
-              className="bg-gradient-primary hover:opacity-90 transition-gentle"
-              onClick={() => window.location.href = '#submit'}
-            >
-              <Plus className="h-4 w-4 mr-2" />
-              Submit Your Event
-            </Button>
-          </div>
+const columns: { heading: string; links: FooterLink[] }[] = [
+  {
+    heading: 'Practices',
+    links: [
+      { label: 'Yoga', href: '#explore', icon: Flower2 },
+      { label: 'Ayurveda', href: '#explore', icon: Leaf },
+      { label: 'Astrology', href: '#explore', icon: MoonStar },
+      { label: 'Tantra', href: '#explore', icon: Flame }
+    ]
+  },
+  {
+    heading: 'Browse',
+    links: [
+      { label: 'All events', href: '#explore', icon: Compass },
+      { label: 'Retreats', href: '#explore', icon: Tent },
+      { label: 'Workshops', href: '#explore', icon: Sparkles },
+      { label: 'Festivals', href: '#explore', icon: CalendarDays }
+    ]
+  },
+  {
+    heading: 'Connect',
+    links: [
+      { label: 'About', href: '#about', icon: Info },
+      { label: 'For organizers', href: '#submit', icon: Send },
+      { label: 'Contact', href: 'mailto:namaste.soul.contact@gmail.com', icon: Mail },
+      { label: 'Privacy & terms', href: '#legal', icon: FileText }
+    ]
+  }
+];
 
-          {/* Contact & Legal - Right */}
-          <div className="text-center md:text-right md:pr-8">
-            <h4 className="font-semibold mb-4">Connect</h4>
-            <ul className="space-y-2 text-muted-foreground">
-              <li>
-                <a 
-                  href="mailto:namaste.soul.contact@gmail.com" 
-                  className="hover:text-primary transition-smooth inline-flex items-center gap-2 justify-center md:justify-end"
-                >
-                  <Mail className="h-4 w-4" />
-                  Contact Us
-                </a>
-              </li>
-              <li><a href="#about" className="hover:text-primary transition-smooth">About</a></li>
-              <li><a href="#submit" className="hover:text-primary transition-smooth">For Organizers</a></li>
-              <li><a href="#legal" className="hover:text-primary transition-smooth">Privacy & Terms</a></li>
-            </ul>
+const Footer = () => (
+  <footer className="border-t border-border bg-background">
+    <div className="container mx-auto">
+      {/* Masthead */}
+      <div className="flex flex-wrap items-end justify-between gap-8 py-16 md:py-20">
+        <div>
+          <div className="font-display text-display-sm font-light leading-none">
+            Namaste<span className="italic">Soul</span>
           </div>
+          <p className="label-eyebrow mt-5 text-muted-foreground">
+            Ancient wisdom, modern wellbeing
+          </p>
         </div>
 
-        {/* Copyright */}
-        <div className="border-t border-border mt-12 pt-8 text-center text-sm text-muted-foreground">
-          <p>© 2025 NamasteSoul. Made with 🙏 for the spiritual community.</p>
-        </div>
+        <a
+          href="#submit"
+          className="group inline-flex items-center gap-3 bg-primary px-8 py-4 text-primary-foreground
+                     transition-colors hover:bg-foreground"
+        >
+          <span className="label-eyebrow text-[0.8rem] font-semibold">
+            Submit your event
+          </span>
+          <ArrowUpRight
+            className="h-4 w-4 transition-transform duration-500 ease-out-soft group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            strokeWidth={1.5}
+          />
+        </a>
       </div>
-    </footer>
-  );
-};
+
+      {/* Link columns — line icons, drawn at the same weight as the type
+          so they read as part of the text rather than as decoration. */}
+      <div className="grid gap-10 border-t border-border py-14 sm:grid-cols-3">
+        {columns.map((column) => (
+          <div key={column.heading}>
+            <h4 className="label-eyebrow mb-5 text-[0.8rem] font-semibold text-foreground">
+              {column.heading}
+            </h4>
+            <ul className="space-y-3.5">
+              {column.links.map(({ label, href, icon: Icon }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    className="group flex items-center gap-3 text-sm font-light transition-colors hover:text-primary"
+                  >
+                    <Icon
+                      className="h-4 w-4 shrink-0 text-border-strong transition-colors group-hover:text-primary"
+                      strokeWidth={1.5}
+                      aria-hidden="true"
+                    />
+                    <span className="link-underline">{label}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      {/* Colophon */}
+      <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border py-8">
+        <p className="label-eyebrow text-muted-foreground">
+          © {new Date().getFullYear()} NamasteSoul
+        </p>
+        <p className="label-eyebrow text-muted-foreground">
+          Made in the Netherlands
+        </p>
+      </div>
+    </div>
+  </footer>
+);
 
 export default Footer;

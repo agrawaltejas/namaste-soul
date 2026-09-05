@@ -1,8 +1,5 @@
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card } from '@/components/ui/card';
-import { Mail, Send, CheckCircle } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Newsletter = () => {
@@ -10,70 +7,89 @@ const Newsletter = () => {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
 
-    // Simulate newsletter subscription
-    setTimeout(() => {
-      setIsSubscribed(true);
-      toast({
-        title: "Welcome to NamasteSoul! 🙏",
-        description: "You'll receive curated event updates weekly.",
-      });
-      setEmail('');
-    }, 1000);
+    // TODO: replace with a Supabase insert into `newsletter_subscribers`
+    setIsSubscribed(true);
+    toast({
+      title: 'You are on the list',
+      description: 'A curated digest will reach you each week.'
+    });
+    setEmail('');
   };
 
-  if (isSubscribed) {
-    return (
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4">
-          <Card className="max-w-2xl mx-auto text-center p-8 bg-gradient-card border-primary/20 shadow-medium">
-            <CheckCircle className="h-16 w-16 text-primary mx-auto mb-4" />
-            <h3 className="text-2xl font-bold mb-2">Thank you for subscribing!</h3>
-            <p className="text-muted-foreground">
-              You're all set to receive our weekly digest of the most inspiring holistic events.
-            </p>
-          </Card>
-        </div>
-      </section>
-    );
-  }
-
   return (
-    <section className="py-16 bg-background">
-      <div className="container mx-auto px-4">
-        <Card className="max-w-2xl mx-auto text-center p-8 bg-gradient-card border-border shadow-medium">
-          <Mail className="h-12 w-12 text-primary mx-auto mb-4" />
-          <h3 className="text-2xl font-bold mb-2">Stay In The Flow</h3>
-          <p className="text-muted-foreground mb-6">
-            Get weekly updates on the most inspiring yoga retreats, ayurveda workshops, 
-            and spiritual events in your inbox.
-          </p>
-          
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="flex-1 bg-background border-border"
-              required
-            />
-            <Button 
-              type="submit"
-              className="bg-gradient-primary hover:opacity-90 transition-gentle px-6"
-            >
-              <Send className="h-4 w-4 mr-2" />
-              Subscribe
-            </Button>
-          </form>
-          
-          <p className="text-sm text-muted-foreground mt-4">
-            Free weekly digest • Unsubscribe anytime • No spam, just soulful events
-          </p>
-        </Card>
+    <section
+      id="submit"
+      className="bg-foreground py-24 text-background md:py-32"
+    >
+      <div className="container mx-auto">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-24">
+          <div>
+            <div className="label-eyebrow mb-5 text-background/50">
+              The weekly letter
+            </div>
+            <h2 className="text-display-sm font-display font-light">
+              Stay in
+              <span className="italic"> the flow</span>
+            </h2>
+          </div>
+
+          <div>
+            {isSubscribed ? (
+              <div className="flex items-start gap-4 border-t border-background/20 pt-8">
+                <Check className="mt-1 h-5 w-5 shrink-0" strokeWidth={1.5} />
+                <div>
+                  <p className="font-display text-xl">Thank you.</p>
+                  <p className="mt-2 font-light leading-relaxed text-background/60">
+                    Your first digest of retreats, workshops and festivals will
+                    arrive next week.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <>
+                <p className="mb-8 max-w-md font-light leading-relaxed text-background/70">
+                  One considered email a week — the most compelling yoga,
+                  Ayurveda and wellbeing gatherings across the Netherlands. No
+                  noise.
+                </p>
+
+                <form onSubmit={handleSubmit}>
+                  <div className="flex items-center border-b border-background/30 transition-colors focus-within:border-background">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="your@email.com"
+                      aria-label="Email address"
+                      required
+                      className="w-full bg-transparent py-4 text-lg font-light text-background
+                                 placeholder:text-background/40 focus:outline-none"
+                    />
+                    <button
+                      type="submit"
+                      aria-label="Subscribe"
+                      className="group flex shrink-0 items-center gap-3 py-4 pl-6 transition-opacity hover:opacity-70"
+                    >
+                      <span className="label-eyebrow">Subscribe</span>
+                      <ArrowRight
+                        className="h-4 w-4 transition-transform duration-500 ease-out-soft group-hover:translate-x-1"
+                        strokeWidth={1.5}
+                      />
+                    </button>
+                  </div>
+                </form>
+
+                <p className="label-eyebrow mt-5 text-background/40">
+                  Free · Unsubscribe anytime
+                </p>
+              </>
+            )}
+          </div>
+        </div>
       </div>
     </section>
   );
