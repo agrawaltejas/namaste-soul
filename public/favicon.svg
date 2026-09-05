@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="NamasteSoul">
+  <!-- Terracotta ground: the primary token, hsl(16 56% 44%) -->
+  <rect width="64" height="64" rx="12" fill="#AF5331"/>
+  <!-- Three-petal lotus in paper bone: the background token, hsl(38 28% 96%).
+       Deliberately few, heavy shapes: fine detail disappears at 16px. -->
+  <g fill="#F8F6F2">
+    <path d="M32 12c6 9 6 21 0 30-6-9-6-21 0-30z"/>
+    <path d="M11 22c10 2 19 10 21 20-11-1-20-9-21-20z"/>
+    <path d="M53 22c-1 11-10 19-21 20 2-10 11-18 21-20z"/>
+  </g>
+</svg>

@@ -2,120 +2,114 @@
 @tailwind components;
 @tailwind utilities;
 
-/* NamasteSoul Design System - Ancient Wisdom, Modern Wellbeing
-All colors MUST be HSL.
-*/
+/* ============================================================
+   NamasteSoul — "Editorial Sanctuary"
+   Warm paper, deep ink, one earthen accent.
+   Spiritual through restraint and materiality, not symbols.
+   All colours MUST be HSL triplets (no hsl() wrapper).
+   ============================================================ */
 
 @layer base {
   :root {
-    /* Base colors - warm, serene palette */
-    --background: 32 20% 98%;
-    --foreground: 160 8% 15%;
+    /* Paper — warm bone, never pure white */
+    --background: 38 28% 96%;
+    --foreground: 25 18% 13%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 160 8% 15%;
+    /* Surface — the sand band used to alternate sections */
+    --surface: 36 26% 93%;
+    --surface-deep: 30 22% 89%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 160 8% 15%;
+    --card: 38 30% 98%;
+    --card-foreground: 25 18% 13%;
 
-    /* Primary - sage green for spiritual calm */
-    --primary: 150 25% 35%;
-    --primary-foreground: 0 0% 100%;
-    --primary-light: 150 30% 85%;
-    --primary-glow: 150 40% 65%;
+    --popover: 38 30% 98%;
+    --popover-foreground: 25 18% 13%;
 
-    /* Secondary - warm earth tones */
-    --secondary: 35 35% 90%;
-    --secondary-foreground: 160 8% 15%;
+    /* Primary — terracotta. Earth and clay: warm, universal,
+       not tied to any single tradition. The only saturated colour. */
+    --primary: 16 56% 44%;
+    --primary-foreground: 38 30% 97%;
+    --primary-soft: 16 40% 90%;
 
-    /* Muted - soft neutrals */
-    --muted: 30 15% 95%;
-    --muted-foreground: 160 6% 45%;
+    /* Secondary — muted moss, for quiet supporting marks */
+    --secondary: 145 12% 36%;
+    --secondary-foreground: 38 30% 97%;
 
-    /* Accent - soft lavender for spiritual touch */
-    --accent: 260 25% 88%;
-    --accent-foreground: 160 8% 15%;
-    --accent-vibrant: 260 60% 70%;
+    /* Muted neutrals */
+    --muted: 36 18% 90%;
+    --muted-foreground: 28 8% 42%;
 
-    /* Status colors */
-    --destructive: 0 70% 55%;
-    --destructive-foreground: 0 0% 100%;
-    --success: 150 60% 45%;
-    --warning: 45 85% 60%;
+    /* Accent — ochre, reserved for the smallest highlights */
+    --accent: 38 52% 50%;
+    --accent-foreground: 25 18% 13%;
 
-    /* UI elements */
-    --border: 150 15% 88%;
-    --input: 0 0% 100%;
-    --ring: 150 25% 35%;
+    /* Two colours beyond the earth range, used sparingly:
+       night, a deep indigo that cools the warm palette without fighting it,
+       and saffron, a marigold that lifts it. Category marks and the
+       newsletter band are the only places they appear at any size. */
+    --night: 236 34% 34%;
+    --night-foreground: 38 26% 94%;
+    --saffron: 32 76% 52%;
 
-    /* Gradients for spiritual ambiance */
-    --gradient-primary: linear-gradient(135deg, hsl(150 25% 35%), hsl(150 40% 65%));
-    --gradient-hero: linear-gradient(135deg, hsl(150 30% 95%) 0%, hsl(260 25% 95%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(30 15% 98%) 100%);
-    
-    /* Shadows for depth */
-    --shadow-soft: 0 2px 8px -2px hsl(150 25% 35% / 0.1);
-    --shadow-medium: 0 8px 25px -5px hsl(150 25% 35% / 0.15);
-    --shadow-glow: 0 0 30px hsl(150 40% 65% / 0.3);
+    --destructive: 6 55% 46%;
+    --destructive-foreground: 38 30% 97%;
 
-    /* Animations */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-gentle: all 0.2s ease-out;
+    /* Hairlines — the structural device replacing shadows */
+    --border: 30 14% 84%;
+    --border-strong: 28 12% 72%;
+    --input: 30 14% 84%;
+    --ring: 16 56% 44%;
 
-    --radius: 0.75rem;
+    /* Editorial geometry: near-square, printed rather than bubbly */
+    --radius: 0.125rem;
 
+    /* Depth is used sparingly and always warm */
+    --shadow-lift: 0 1px 2px hsl(25 18% 13% / 0.04),
+                   0 8px 24px -12px hsl(25 18% 13% / 0.18);
+
+    --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .dark {
-    /* Base colors for dark mode */
-    --background: 160 8% 8%;
-    --foreground: 32 20% 95%;
+    --background: 25 14% 9%;
+    --foreground: 38 22% 92%;
 
-    --card: 160 8% 10%;
-    --card-foreground: 32 20% 95%;
+    --surface: 25 13% 12%;
+    --surface-deep: 25 12% 15%;
 
-    --popover: 160 8% 10%;
-    --popover-foreground: 32 20% 95%;
+    --card: 25 13% 12%;
+    --card-foreground: 38 22% 92%;
 
-    /* Primary - brighter sage for dark mode */
-    --primary: 150 35% 55%;
-    --primary-foreground: 160 8% 8%;
-    --primary-light: 150 25% 25%;
-    --primary-glow: 150 40% 65%;
+    --popover: 25 13% 12%;
+    --popover-foreground: 38 22% 92%;
 
-    /* Secondary - darker earth tones */
-    --secondary: 160 8% 15%;
-    --secondary-foreground: 32 20% 95%;
+    --primary: 16 62% 56%;
+    --primary-foreground: 25 14% 9%;
+    --primary-soft: 16 30% 22%;
 
-    /* Muted - darker neutrals */
-    --muted: 160 8% 12%;
-    --muted-foreground: 160 6% 60%;
+    --secondary: 145 14% 58%;
+    --secondary-foreground: 25 14% 9%;
 
-    /* Accent - softer lavender for dark mode */
-    --accent: 260 15% 20%;
-    --accent-foreground: 32 20% 95%;
-    --accent-vibrant: 260 50% 70%;
+    --muted: 25 12% 16%;
+    --muted-foreground: 32 10% 62%;
 
-    /* Status colors for dark mode */
-    --destructive: 0 60% 50%;
-    --destructive-foreground: 32 20% 95%;
-    --success: 150 50% 50%;
-    --warning: 45 80% 60%;
+    --accent: 38 54% 60%;
+    --accent-foreground: 25 14% 9%;
 
-    /* UI elements */
-    --border: 160 8% 15%;
-    --input: 160 8% 12%;
-    --ring: 150 35% 55%;
+    --night: 236 30% 27%;
+    --night-foreground: 38 26% 94%;
+    --saffron: 34 72% 58%;
 
-    /* Dark mode gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(150 35% 45%), hsl(150 40% 65%));
-    --gradient-hero: linear-gradient(135deg, hsl(160 8% 8%) 0%, hsl(260 15% 12%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(160 8% 10%) 0%, hsl(160 8% 12%) 100%);
-    
-    /* Dark mode shadows */
-    --shadow-soft: 0 2px 8px -2px hsl(0 0% 0% / 0.3);
-    --shadow-medium: 0 8px 25px -5px hsl(0 0% 0% / 0.4);
-    --shadow-glow: 0 0 30px hsl(150 40% 65% / 0.2);
+    --destructive: 6 55% 56%;
+    --destructive-foreground: 25 14% 9%;
+
+    --border: 28 10% 22%;
+    --border-strong: 28 10% 32%;
+    --input: 28 10% 22%;
+    --ring: 16 62% 56%;
+
+    --shadow-lift: 0 1px 2px hsl(0 0% 0% / 0.3),
+                   0 8px 24px -12px hsl(0 0% 0% / 0.6);
   }
 }
 
@@ -124,7 +118,104 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+    /* Anchor targets clear the sticky header */
+    scroll-padding-top: 5rem;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "kern", "liga", "calt";
+  }
+
+  /* Display type: Fraunces, with optical sizing dialled for headlines.
+     SOFT rounds the terminals slightly — warmth without whimsy. */
+  h1, h2, h3, .font-display {
+    /* Set directly rather than via @apply: the selector list includes
+       .font-display itself, which would be a circular utility reference. */
+    font-family: theme('fontFamily.display');
+    font-variation-settings: "SOFT" 20, "WONK" 0, "opsz" 40;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.18);
+  }
+
+  /* Focus ring — visible, warm, never the browser default blue */
+  :focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* The tracked-out micro-label. Used for every piece of metadata:
+     category, section eyebrow, footer heading. Carries the editorial voice. */
+  .label-eyebrow {
+    @apply font-sans text-[0.6875rem] font-medium uppercase;
+    letter-spacing: 0.16em;
+  }
+
+  /* Section divider: hairline interrupted by a small lozenge.
+     A non-denominational ornament — the only decorative mark on the site. */
+  .rule-ornament {
+    @apply flex items-center justify-center gap-3 text-border-strong;
+  }
+  .rule-ornament::before,
+  .rule-ornament::after {
+    content: "";
+    @apply h-px flex-1 bg-border;
+  }
+
+  /* Underline that grows from the left on hover — used on editorial links */
+  .link-underline {
+    @apply relative inline-block;
+  }
+  .link-underline::after {
+    content: "";
+    @apply absolute bottom-0 left-0 h-px w-0 bg-current;
+    transition: width 0.4s var(--ease-out-soft);
+  }
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+}
+
+@layer utilities {
+  /* Scroll-reveal: elements rise gently into place.
+     Disabled wholesale under prefers-reduced-motion (see below). */
+  .reveal {
+    opacity: 0;
+    transform: translateY(1.25rem);
+    transition: opacity 0.8s var(--ease-out-soft),
+                transform 0.8s var(--ease-out-soft);
+  }
+  .reveal-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Warm scrim over hero imagery — keeps type legible without
+     washing the photograph out to grey. */
+  .scrim-warm {
+    background: linear-gradient(
+      to bottom,
+      hsl(25 20% 10% / 0.58) 0%,
+      hsl(25 20% 10% / 0.42) 45%,
+      hsl(25 20% 10% / 0.72) 100%
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

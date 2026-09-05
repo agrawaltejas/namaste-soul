@@ -1,6 +1,4 @@
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Search, MapPin, Calendar } from 'lucide-react';
+import { Search } from 'lucide-react';
 import heroBg from '@/assets/hero-bg.jpg';
 
 interface HeroProps {
@@ -8,71 +6,89 @@ interface HeroProps {
   searchQuery: string;
 }
 
+const disciplines = ['Yoga', 'Ayurveda', 'Astrology', 'Tantra'];
+
 const Hero = ({ onSearch, searchQuery }: HeroProps) => {
   return (
-    <section 
-      className="relative min-h-[50vh] flex items-center justify-center bg-gradient-hero overflow-hidden"
-      style={{
-        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url(${heroBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
+    <section
+      id="top"
+      className="relative flex min-h-[52vh] flex-col justify-center overflow-hidden md:min-h-[56vh]"
     >
-      <div className="container mx-auto px-4 text-center relative z-10">
-        {/* Brand & Tagline */}
-        <div className="mb-6">
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
-              Ancient Wisdom, Modern Wellbeing
-            </span>
-          </h1>
-          <h2 className="text-base md:text-lg font-medium text-muted-foreground leading-tight">
-            Discover Holistic Events in Netherlands
-          </h2>
-        </div>
-
-        {/* Search Bar */}
-        <div className="max-w-2xl mx-auto mb-6">
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
-            <Input
-              placeholder="Search for yoga retreats, ayurveda workshops, astrology courses..."
-              value={searchQuery}
-              onChange={(e) => onSearch(e.target.value)}
-              className="pl-12 pr-24 h-14 text-lg bg-card/80 backdrop-blur-sm border-border shadow-medium focus:ring-primary focus:border-primary rounded-xl"
-            />
-            <Button 
-              size="lg" 
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-primary hover:opacity-90 transition-gentle rounded-lg"
-            >
-              Search
-            </Button>
-          </div>
-        </div>
-
-        {/* Quick Stats/Features */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <MapPin className="h-5 w-5 text-primary" />
-            <span>Netherlands</span>
-          </div>
-          <div className="hidden sm:block w-1 h-1 bg-muted-foreground rounded-full"></div>
-          <div className="flex items-center gap-2">
-            <Calendar className="h-5 w-5 text-primary" />
-            <span>Updated Daily</span>
-          </div>
-          <div className="hidden sm:block w-1 h-1 bg-muted-foreground rounded-full"></div>
-          <div className="flex items-center gap-2">
-            <span className="h-5 w-5 text-primary text-xl">🧘</span>
-            <span>Curated Events</span>
-          </div>
-        </div>
+      {/* Background photograph. Anchored to the bottom: the lotuses and the
+          stacked stones live in the lower third, and a centred crop of a wide
+          frame discards them along with the sun, leaving only hillside. */}
+      <div className="absolute inset-0">
+        <img
+          src={heroBg}
+          alt=""
+          aria-hidden="true"
+          className="h-full w-full object-cover object-bottom animate-ken-burns"
+        />
+        <div className="absolute inset-0 scrim-warm" />
       </div>
 
-      {/* Decorative Elements */}
-      <div className="absolute top-10 left-10 w-20 h-20 bg-primary/5 rounded-full blur-xl animate-pulse"></div>
-      <div className="absolute bottom-10 right-10 w-32 h-32 bg-accent-vibrant/10 rounded-full blur-2xl animate-pulse delay-700"></div>
+      <div className="container relative mx-auto pb-14 pt-28 md:pb-16 md:pt-[7.5rem]">
+        <div className="max-w-2xl">
+          <div className="label-eyebrow mb-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-background/70 animate-fade-up">
+            <span>Netherlands</span>
+            {disciplines.map((d) => (
+              <span key={d} className="flex items-center gap-3">
+                <span aria-hidden="true" className="text-background/40">/</span>
+                {d}
+              </span>
+            ))}
+          </div>
+
+          <h1
+            className="text-display-md font-display font-light text-background mb-4 animate-fade-up"
+            style={{ animationDelay: '80ms' }}
+          >
+            Ancient wisdom,
+            <br />
+            <span className="italic">modern wellbeing.</span>
+          </h1>
+
+          <p
+            className="mb-8 max-w-md text-base font-light leading-relaxed text-background/80 md:text-lg animate-fade-up"
+            style={{ animationDelay: '160ms' }}
+          >
+            A curated index of retreats, workshops and festivals across the
+            Netherlands — gathered in one place.
+          </p>
+
+          {/* Search — a rule, not a box */}
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            role="search"
+            className="max-w-lg animate-fade-up"
+            style={{ animationDelay: '240ms' }}
+          >
+            <div className="flex items-center border-b border-background/35 transition-colors duration-500 focus-within:border-background">
+              <Search
+                className="h-5 w-5 shrink-0 text-background/60"
+                strokeWidth={1.5}
+                aria-hidden="true"
+              />
+              <input
+                type="search"
+                value={searchQuery}
+                onChange={(e) => onSearch(e.target.value)}
+                placeholder="Search retreats, workshops, cities…"
+                aria-label="Search events"
+                className="w-full bg-transparent px-4 py-3.5 text-base font-light text-background
+                           placeholder:text-background/50 focus:outline-none md:text-lg
+                           [&::-webkit-search-cancel-button]:appearance-none"
+              />
+              <a
+                href="#explore"
+                className="label-eyebrow shrink-0 pl-4 text-background/70 transition-colors hover:text-background"
+              >
+                Browse
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
     </section>
   );
 };

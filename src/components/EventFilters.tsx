@@ -1,8 +1,20 @@
-import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { X, Filter, Calendar, MapPin, Tag, Clock } from 'lucide-react';
+import {
+  CalendarDays,
+  Clock,
+  Flower2,
+  Languages,
+  MapPin,
+  Shapes,
+  X,
+  type LucideIcon
+} from 'lucide-react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select';
 import { EventFilters as EventFiltersType } from '@/types/event';
 
 interface EventFiltersProps {
@@ -11,251 +23,185 @@ interface EventFiltersProps {
   totalResults: number;
 }
 
+interface Field {
+  key: keyof EventFiltersType;
+  placeholder: string;
+  icon: LucideIcon;
+  options: { value: string; label: string }[];
+}
+
+/* Declarative field config — one source of truth for the controls, their icons
+   and the labels shown on the active-filter chips. A new facet is one entry. */
+const FIELDS: Field[] = [
+  {
+    key: 'country',
+    placeholder: 'Anywhere',
+    icon: MapPin,
+    options: [
+      { value: 'Netherlands', label: 'Netherlands' },
+      { value: 'India', label: 'India' }
+    ]
+  },
+  {
+    key: 'category',
+    placeholder: 'All practices',
+    icon: Flower2,
+    options: [
+      { value: 'Yoga', label: 'Yoga' },
+      { value: 'Ayurveda', label: 'Ayurveda' },
+      { value: 'Astrology', label: 'Astrology' },
+      { value: 'Tantra', label: 'Tantra' }
+    ]
+  },
+  {
+    key: 'type',
+    placeholder: 'Any format',
+    icon: Shapes,
+    options: [
+      { value: 'Retreat', label: 'Retreat' },
+      { value: 'Workshop', label: 'Workshop' },
+      { value: 'Festival', label: 'Festival' },
+      { value: 'Training', label: 'Training' }
+    ]
+  },
+  {
+    key: 'dateRange',
+    placeholder: 'Anytime',
+    icon: CalendarDays,
+    options: [
+      { value: 'this-weekend', label: 'This weekend' },
+      { value: 'next-30-days', label: 'Next 30 days' },
+      { value: 'custom', label: 'Custom range' }
+    ]
+  },
+  {
+    key: 'duration',
+    placeholder: 'Any length',
+    icon: Clock,
+    options: [
+      { value: '1-day', label: '1 day' },
+      { value: 'weekend', label: 'Weekend' },
+      { value: '3-4-days', label: '3–4 days' },
+      { value: '5-7-days', label: '5–7 days' },
+      { value: '1-week-plus', label: '1 week +' }
+    ]
+  },
+  {
+    key: 'language',
+    placeholder: 'Any language',
+    icon: Languages,
+    options: [
+      { value: 'English', label: 'English' },
+      { value: 'Dutch', label: 'Dutch' },
+      { value: 'Mixed', label: 'Mixed' }
+    ]
+  }
+];
+
 const EventFilters = ({ filters, onFiltersChange, totalResults }: EventFiltersProps) => {
-  const updateFilter = (key: keyof EventFiltersType, value: any) => {
+  const updateFilter = (key: keyof EventFiltersType, value: string | undefined) => {
     onFiltersChange({ ...filters, [key]: value });
   };
 
   const clearFilter = (key: keyof EventFiltersType) => {
-    const newFilters = { ...filters };
-    delete newFilters[key];
-    onFiltersChange(newFilters);
+    const next = { ...filters };
+    delete next[key];
+    onFiltersChange(next);
   };
 
-  const clearAllFilters = () => {
-    onFiltersChange({});
-  };
+  const activeCount = Object.keys(filters).length;
 
-  const activeFiltersCount = Object.keys(filters).length;
+  const labelFor = (key: string, value: unknown) => {
+    const field = FIELDS.find((f) => f.key === key);
+    return field?.options.find((o) => o.value === value)?.label ?? String(value);
+  };
 
   return (
-    <Card className="p-6 mb-8 bg-gradient-card border-border shadow-soft sticky top-20 z-40">
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-2">
-          <Filter className="h-5 w-5 text-primary" />
-          <h3 className="font-semibold text-lg">Filters</h3>
-          {activeFiltersCount > 0 && (
-            <Badge variant="secondary" className="ml-2">
-              {activeFiltersCount}
-            </Badge>
+    <div className="sticky top-[3.75rem] z-40 mb-14 border-y border-border bg-background/92 backdrop-blur-md">
+      <div className="flex flex-wrap items-center gap-x-7 gap-y-3 py-4">
+        {FIELDS.map(({ key, placeholder, icon: Icon, options }) => {
+          // A set filter colours its whole control, so the active facets are
+          // legible at a glance without reading the chip row below.
+          const isActive = Boolean(filters[key]);
+
+          return (
+            <Select
+              key={key}
+              value={(filters[key] as string) || undefined}
+              onValueChange={(value) =>
+                updateFilter(key, value === 'all' ? undefined : value)
+              }
+            >
+              <SelectTrigger
+                aria-label={placeholder}
+                className={[
+                  'group h-10 w-auto gap-2.5 rounded-none border-0 border-b bg-transparent px-1 pb-2',
+                  'text-sm font-normal shadow-none transition-colors',
+                  'focus:ring-0 focus:ring-offset-0 [&>span]:truncate',
+                  isActive
+                    ? 'border-primary text-primary'
+                    : 'border-border text-foreground hover:border-border-strong'
+                ].join(' ')}
+              >
+                <Icon
+                  className={[
+                    'h-4 w-4 shrink-0 transition-colors',
+                    isActive ? 'text-primary' : 'text-border-strong group-hover:text-muted-foreground'
+                  ].join(' ')}
+                  strokeWidth={1.5}
+                  aria-hidden="true"
+                />
+                <SelectValue placeholder={placeholder} />
+              </SelectTrigger>
+
+              <SelectContent className="rounded-none border-border">
+                <SelectItem value="all">{placeholder}</SelectItem>
+                {options.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          );
+        })}
+
+        <div className="ml-auto flex items-center gap-5">
+          {activeCount > 0 && (
+            <button
+              onClick={() => onFiltersChange({})}
+              className="label-eyebrow text-muted-foreground transition-colors hover:text-primary"
+            >
+              Clear all
+            </button>
           )}
-        </div>
-        {activeFiltersCount > 0 && (
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={clearAllFilters}
-            className="text-muted-foreground hover:text-foreground"
-          >
-            Clear all
-          </Button>
-        )}
-      </div>
-
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-        {/* Country Filter */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium flex items-center gap-1">
-            <MapPin className="h-4 w-4" />
-            Country
-          </label>
-          <Select
-            value={filters.country || undefined}
-            onValueChange={(value) => updateFilter('country', value === 'all' ? undefined : value)}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="All countries" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All countries</SelectItem>
-              <SelectItem value="Netherlands">Netherlands</SelectItem>
-              <SelectItem value="India">India</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Category Filter */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium flex items-center gap-1">
-            <Tag className="h-4 w-4" />
-            Category
-          </label>
-          <Select
-            value={filters.category || undefined}
-            onValueChange={(value) => updateFilter('category', value === 'all' ? undefined : value)}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="All categories" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All categories</SelectItem>
-              <SelectItem value="Yoga">🧘 Yoga</SelectItem>
-              <SelectItem value="Ayurveda">🌿 Ayurveda</SelectItem>
-              <SelectItem value="Astrology">🔭 Astrology</SelectItem>
-              <SelectItem value="Tantra">🔥 Tantra</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Type Filter */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Type</label>
-          <Select
-            value={filters.type || undefined}
-            onValueChange={(value) => updateFilter('type', value === 'all' ? undefined : value)}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="All types" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All types</SelectItem>
-              <SelectItem value="Retreat">Retreat</SelectItem>
-              <SelectItem value="Workshop">Workshop</SelectItem>
-              <SelectItem value="Festival">Festival</SelectItem>
-              <SelectItem value="Training">Training</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Date Range Filter */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium flex items-center gap-1">
-            <Calendar className="h-4 w-4" />
-            When
-          </label>
-          <Select
-            value={filters.dateRange || undefined}
-            onValueChange={(value) => updateFilter('dateRange', value === 'all' ? undefined : value)}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Anytime" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">Anytime</SelectItem>
-              <SelectItem value="this-weekend">This Weekend</SelectItem>
-              <SelectItem value="next-30-days">Next 30 Days</SelectItem>
-              <SelectItem value="custom">Custom Range</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Duration Filter */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium flex items-center gap-1">
-            <Clock className="h-4 w-4" />
-            Duration
-          </label>
-          <Select
-            value={filters.duration || undefined}
-            onValueChange={(value) => updateFilter('duration', value === 'all' ? undefined : value)}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Any length" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">Any length</SelectItem>
-              <SelectItem value="1-day">1 Day</SelectItem>
-              <SelectItem value="weekend">Weekend (2-3 days)</SelectItem>
-              <SelectItem value="3-4-days">3-4 Days</SelectItem>
-              <SelectItem value="5-7-days">5-7 Days</SelectItem>
-              <SelectItem value="1-week-plus">1+ Week</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Language Filter */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Language</label>
-          <Select
-            value={filters.language || undefined}
-            onValueChange={(value) => updateFilter('language', value === 'all' ? undefined : value)}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="All languages" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All languages</SelectItem>
-              <SelectItem value="English">English</SelectItem>
-              <SelectItem value="Dutch">Dutch</SelectItem>
-              <SelectItem value="Mixed">Mixed</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
-
-      {/* Active Filters */}
-      {activeFiltersCount > 0 && (
-        <div className="mt-6 pt-4 border-t border-border">
-          <div className="flex flex-wrap gap-2">
-            {filters.country && (
-              <Badge variant="secondary" className="flex items-center gap-1">
-                Country: {filters.country}
-                <X
-                  className="h-3 w-3 cursor-pointer hover:text-destructive"
-                  onClick={() => clearFilter('country')}
-                />
-              </Badge>
-            )}
-            {filters.category && (
-              <Badge variant="secondary" className="flex items-center gap-1">
-                {filters.category}
-                <X
-                  className="h-3 w-3 cursor-pointer hover:text-destructive"
-                  onClick={() => clearFilter('category')}
-                />
-              </Badge>
-            )}
-            {filters.type && (
-              <Badge variant="secondary" className="flex items-center gap-1">
-                {filters.type}
-                <X
-                  className="h-3 w-3 cursor-pointer hover:text-destructive"
-                  onClick={() => clearFilter('type')}
-                />
-              </Badge>
-            )}
-            {filters.dateRange && (
-              <Badge variant="secondary" className="flex items-center gap-1">
-                {filters.dateRange === 'this-weekend' ? 'This Weekend' :
-                 filters.dateRange === 'next-30-days' ? 'Next 30 Days' :
-                 filters.dateRange}
-                <X
-                  className="h-3 w-3 cursor-pointer hover:text-destructive"
-                  onClick={() => clearFilter('dateRange')}
-                />
-              </Badge>
-            )}
-            {filters.duration && (
-              <Badge variant="secondary" className="flex items-center gap-1">
-                {filters.duration === '1-day' ? '1 Day' :
-                 filters.duration === 'weekend' ? 'Weekend' :
-                 filters.duration === '3-4-days' ? '3-4 Days' :
-                 filters.duration === '5-7-days' ? '5-7 Days' :
-                 filters.duration === '1-week-plus' ? '1+ Week' : filters.duration}
-                <X
-                  className="h-3 w-3 cursor-pointer hover:text-destructive"
-                  onClick={() => clearFilter('duration')}
-                />
-              </Badge>
-            )}
-            {filters.language && (
-              <Badge variant="secondary" className="flex items-center gap-1">
-                {filters.language}
-                <X
-                  className="h-3 w-3 cursor-pointer hover:text-destructive"
-                  onClick={() => clearFilter('language')}
-                />
-              </Badge>
-            )}
+          <div className="whitespace-nowrap text-sm text-muted-foreground">
+            <span className="font-display text-base text-foreground">
+              {totalResults}
+            </span>{' '}
+            {totalResults === 1 ? 'event' : 'events'}
           </div>
         </div>
-      )}
-
-      {/* Results Count */}
-      <div className="mt-4 text-sm text-muted-foreground">
-        {totalResults} event{totalResults !== 1 ? 's' : ''} found
       </div>
-    </Card>
+
+      {activeCount > 0 && (
+        <div className="flex flex-wrap gap-2 border-t border-border py-3">
+          {Object.entries(filters).map(([key, value]) =>
+            value === undefined ? null : (
+              <button
+                key={key}
+                onClick={() => clearFilter(key as keyof EventFiltersType)}
+                className="label-eyebrow group flex items-center gap-2 border border-primary/30 bg-primary/[0.06] px-2.5 py-1.5
+                           text-primary transition-colors hover:border-primary hover:bg-primary/10"
+              >
+                {labelFor(key, value)}
+                <X className="h-3 w-3 opacity-60 transition-opacity group-hover:opacity-100" />
+              </button>
+            )
+          )}
+        </div>
+      )}
+    </div>
   );
 };
 
