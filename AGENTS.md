@@ -153,6 +153,13 @@ fold.
   (it's public by design and guarded by RLS).
 - **Fonts load from Google Fonts** via `index.html`. Offline dev falls back to
   Georgia/system sans, which looks wrong but isn't broken.
+- **A double hyphen is illegal inside an XML comment.** Writing `--primary` in
+  a comment in `favicon.svg` silently produced an invalid file that browsers
+  refused to render. Say "the primary token" instead.
+- **The favicon is `public/favicon.svg`** (a lotus on terracotta), with
+  `favicon.ico` (64px PNG) and `apple-touch-icon.png` (180px) as fallbacks,
+  all declared in `index.html`. Chrome caches `/favicon.ico` hard, so replace
+  those bytes rather than deleting the file.
 - Utilities beat `@layer components`, so a `text-[0.8rem]` utility correctly
   overrides `.label-eyebrow`'s size. That's how the footer headings and nav
   are sized up.
