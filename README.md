@@ -1,73 +1,75 @@
-# Welcome to your Lovable project
+# NamasteSoul
 
-## Project info
+Curated yoga, Ayurveda, astrology and tantra events in the Netherlands (India coming later).
 
-**URL**: https://lovable.dev/projects/98af8a76-b537-4729-87f5-7c39348c2912
+Live: **https://www.namastesoul.org**
 
-## How can I edit this code?
+## Stack
 
-There are several ways of editing your application.
+| Layer | Choice |
+|---|---|
+| Frontend | Vite + React 18 + TypeScript |
+| UI | Tailwind CSS + shadcn/ui (Radix primitives) |
+| Data | Supabase (Postgres + Auth + RLS) |
+| Hosting | GitHub Pages (static SPA) via GitHub Actions |
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/98af8a76-b537-4729-87f5-7c39348c2912) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+## Getting started
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+npm install
+cp .env.example .env    # fill in your Supabase project values
+npm run dev             # http://localhost:8080
 ```
 
-**Edit a file directly in GitHub**
+### Environment variables
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+| Variable | Purpose |
+|---|---|
+| `VITE_SUPABASE_URL` | Supabase project URL |
+| `VITE_SUPABASE_ANON_KEY` | Supabase anon key (public; safe to ship, guarded by RLS) |
+| `VITE_AFFILIATE_ID` | Tripaneer affiliate ID for outbound booking links |
 
-**Use GitHub Codespaces**
+## Scripts
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+| Command | Does |
+|---|---|
+| `npm run dev` | Dev server with HMR |
+| `npm run build` | Production build to `dist/` |
+| `npm run preview` | Serve the production build locally |
+| `npm run lint` | ESLint |
 
-## What technologies are used for this project?
+## Layout
 
-This project is built with:
+```
+src/
+  components/     Page sections (Hero, EventsGrid, EventCard, Filters, ...)
+    ui/           shadcn/ui primitives — only the 10 actually in use
+  pages/          Route components (Index, NotFound)
+  hooks/          useEventFiltering, use-toast, use-mobile
+  lib/            supabase client, buildAffiliateUrl, cn
+  types/          Event, EventFilters, EventFormData
+  data/           Seed events (temporary — being replaced by Supabase)
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Need another shadcn component? `npx shadcn@latest add <name>` — unused ones were
+removed deliberately to keep the tree small.
 
-## How can I deploy this project?
+## Database
 
-Simply open [Lovable](https://lovable.dev/projects/98af8a76-b537-4729-87f5-7c39348c2912) and click on Share -> Publish.
+Supabase holds six tables: `events`, `profiles`, `event_submissions`,
+`newsletter_subscribers`, `contact_messages`, `scrape_logs`. Row Level Security
+is enabled on all of them.
 
-## Can I connect a custom domain to my Lovable project?
+## Deployment
 
-Yes, you can!
+Pushing to `main` triggers [.github/workflows/deploy.yml](.github/workflows/deploy.yml),
+which builds and publishes to GitHub Pages. The custom domain is pinned by [CNAME](CNAME).
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Roadmap
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- [x] Supabase schema + client, affiliate URL builder
+- [ ] Read events from Supabase instead of `src/data/events.ts`
+- [ ] Daily ingest: JSON-LD / `wp-json` / ICS sources → `events` (status `pending`)
+- [ ] Tripaneer XML feed integration
+- [ ] Organizer submission flow
+- [ ] Per-event pages with `schema.org/Event` markup
